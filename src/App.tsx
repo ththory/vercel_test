@@ -141,12 +141,28 @@ function App() {
     return <div className="loading">로딩 중...</div>
   }
 
+  // 환경 변수 체크
+  const hasEnvVars = import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY
+
   if (!user) {
     return (
       <div className="auth-container">
         <div className="auth-card">
           <h1>📝 Todo App</h1>
           <p>Supabase + Vercel로 만든 Todo 앱</p>
+          {!hasEnvVars && (
+            <div style={{
+              background: '#fff3cd',
+              border: '1px solid #ffc107',
+              borderRadius: '8px',
+              padding: '15px',
+              marginBottom: '20px',
+              color: '#856404'
+            }}>
+              ⚠️ 환경 변수가 설정되지 않았습니다.<br/>
+              .env 파일에 VITE_SUPABASE_URL과 VITE_SUPABASE_ANON_KEY를 설정해주세요.
+            </div>
+          )}
           <form onSubmit={isSignUp ? handleSignUp : handleSignIn}>
             <input
               type="email"
