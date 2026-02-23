@@ -1,6 +1,6 @@
-# Supabase + Vercel Todo App
+# Supabase + Vercel Todo App (Next.js)
 
-React + TypeScript로 만든 Todo 애플리케이션입니다. Supabase를 백엔드로 사용하고 Vercel에 배포합니다.
+Next.js + TypeScript로 만든 Todo 애플리케이션입니다. Supabase를 백엔드로 사용하고 Vercel에 배포합니다.
 
 ## 기능
 
@@ -59,17 +59,11 @@ create policy "Users can delete their own todos"
 
 ### 3. 환경 변수 설정
 
-`.env.example`을 복사하여 `.env` 파일 생성:
+`.env.local` 파일을 생성하고 Supabase 정보 입력:
 
-```bash
-cp .env.example .env
-```
-
-`.env` 파일에 Supabase 정보 입력:
-
-```
-VITE_SUPABASE_URL=your_supabase_project_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
 ### 4. 개발 서버 실행
@@ -78,7 +72,7 @@ VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 npm run dev
 ```
 
-브라우저에서 `http://localhost:5173` 접속
+브라우저에서 `http://localhost:3000` 접속
 
 ## Vercel 배포
 
@@ -98,17 +92,16 @@ git push -u origin main
 2. "New Project" 클릭
 3. GitHub 저장소 선택
 4. Environment Variables 추가:
-   - `VITE_SUPABASE_URL`: Supabase 프로젝트 URL
-   - `VITE_SUPABASE_ANON_KEY`: Supabase Anon Key
+   - `NEXT_PUBLIC_SUPABASE_URL`: Supabase 프로젝트 URL
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Supabase Anon Key
 5. "Deploy" 클릭
 
 배포 완료 후 자동으로 생성된 URL에서 앱 확인 가능!
 
 ## 기술 스택
 
-- **React 18** - UI 라이브러리
+- **Next.js 14** - React 프레임워크 (App Router)
 - **TypeScript** - 타입 안정성
-- **Vite** - 빌드 도구
 - **Supabase** - 백엔드 (인증 + 데이터베이스)
 - **Vercel** - 배포 플랫폼
 
@@ -116,17 +109,17 @@ git push -u origin main
 
 ```
 .
+├── app/
+│   ├── layout.tsx      # 루트 레이아웃
+│   ├── page.tsx         # 메인 페이지
+│   └── globals.css      # 전역 스타일
 ├── src/
-│   ├── App.tsx          # 메인 앱 컴포넌트
-│   ├── App.css          # 스타일
-│   ├── main.tsx         # 진입점
-│   ├── index.css        # 전역 스타일
 │   ├── lib/
 │   │   └── supabase.ts  # Supabase 클라이언트
 │   └── types/
 │       └── todo.ts      # TypeScript 타입 정의
 ├── package.json
-├── vite.config.ts
+├── next.config.js
 ├── tsconfig.json
 └── vercel.json          # Vercel 배포 설정
 ```
